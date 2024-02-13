@@ -57,12 +57,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
     })
 
     fastify.post('/create_todo', preHandler , async (request: RequestWithUser, reply: FastifyReply) => {
-        const { content } = TodoBodyDTO.parse(request.body)
-        const  id  = request.user?.id!
-
-        return todoController.create(id, content)
+        return todoController.create(request, reply)
     })
-
-    
 
 }

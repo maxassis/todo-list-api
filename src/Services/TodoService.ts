@@ -1,16 +1,13 @@
 import { prisma } from "./prismaService";
 
 export class TodoService {
-  async createTodo(content: string, userId: string) {
-    const todoContent = content;
+  async createTodo(id: string, content: string) {
 
-    const todo = await prisma.todo.create({
+    return prisma.todo.create({
       data: {
-        content: todoContent,
-        userId        
+        content,
+        userId: id       
       },
     });
-
-    return todo;
   }
 }
