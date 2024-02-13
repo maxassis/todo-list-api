@@ -5,7 +5,18 @@ meta {
 }
 
 post {
-  url: 
-  body: none
-  auth: none
+  url: http://localhost:3333/create_todo
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjYjNlMjc5LTc1MDQtNDA3ZS1hYTc4LWRjZWY2YTFiMDYwNiIsImVtYWlsIjoibWF4MTFAdGVzdGUuY29tIiwiaWF0IjoxNzA3ODY0MjA5LCJleHAiOjE3MTA0NTYyMDl9.Xet-SavnN5CHniYOdYbaM7BZPWwq4SSMbtyUVjTx0uo
+}
+
+body:json {
+  {
+    "id": "acb3e279-7504-407e-aa78-dcef6a1b0606",
+    "content": "primeiro todo"
+  }
 }
