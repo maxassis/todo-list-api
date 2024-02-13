@@ -10,12 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) 
+  updatedAt DateTime @default(now())
+  Todo      Todo[]
+}
+
+model Todo {
+  id      Int    @id @default(autoincrement())
+  content String @db.Text
+  author  User   @relation(fields: [userId], references: [id])
+  userId String
 }

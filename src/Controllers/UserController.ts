@@ -1,18 +1,18 @@
 import {FastifyRequest, FastifyReply } from 'fastify'
 import { UserService } from '../Services/UserService'
 
-interface Body {
-    name: string;
-    email: string;
-    password: string
-}
+import { z } from 'zod'
+
+const BodyDTO = z.object({
+    name: z.string().min(1, { message: "Nome obrigatorio" }),
+    email: z.string().email(),
+    password: z.string().min(1, { message: "Senha obrigatoria" })
+})
 
 const userService = new UserService()
 export class CreateUserController {
     async create(request: FastifyRequest, reply: FastifyReply) {
-        const { name, email, password } = request.body as Body
-
-        if(!email || !password || !name) reply.status(400).send("nome, email e senha devem ser informados")
+        const { name, email, password } = BodyDTO.parse(request.body)
 
         try {
             await userService.createUser(name, email, password)
@@ -23,10 +23,8 @@ export class CreateUserController {
     }
 
     async login(request: FastifyRequest, reply: FastifyReply) {
-        const { email, password } = request.body as Body
-
-        if(!email || !password) reply.status(400).send("insira o email e a senha validos")
-
+        const { email, password } = BodyDTO.parse(request.body)
+        
         try {
             const token = await userService.login(email, password)
             return reply.status(200).send(token)

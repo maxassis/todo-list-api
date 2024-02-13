@@ -7,7 +7,11 @@ meta {
 post {
   url: http://localhost:3333/signin
   body: json
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdlYTg0MGRhLWUzZmItNDkyMy04ZTE3LWQ5NDc1MTRlYjNiNiIsImVtYWlsIjoibWF4OUB0ZXN0ZS5jb20iLCJpYXQiOjE3MDc4NDgzOTQsImV4cCI6MTcxMDQ0MDM5NH0.sqQrhkrLUMBmjHcucXOtxpibe_igjeEcCDYg7oTlOaw
 }
 
 body:json {

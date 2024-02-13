@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { prisma } from './primaService'
+import { prisma } from './prismaService'
 import jwt from 'jsonwebtoken'
 
 export class UserService {
