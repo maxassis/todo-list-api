@@ -48,18 +48,19 @@ const preHandler = {preHandler : async (request: RequestWithUser, reply: Fastify
  
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     
-   fastify.post('/signin', preHandler , async (request: RequestWithUser, reply: FastifyReply) => {
+   fastify.post('/signin', async (request: RequestWithUser, reply: FastifyReply) => {
         return userController.create(request, reply)
     })
 
-    fastify.post('/login', preHandler, async (request: RequestWithUser, reply: FastifyReply) => {
+    fastify.post('/login', async (request: RequestWithUser, reply: FastifyReply) => {
         return userController.login(request, reply)
     })
 
     fastify.post('/create_todo', preHandler , async (request: RequestWithUser, reply: FastifyReply) => {
-        console.log(request.body.content)
+        const { content } = TodoBodyDTO.parse(request.body)
+        const  id  = request.user?.id!
 
-        return todoController.create(request.user?.id!, request.body.content )
+        return todoController.create(id, content)
     })
 
     
