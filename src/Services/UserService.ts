@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { prisma } from './prismaService'
 import jwt from 'jsonwebtoken'
 
-export class UserService {
+class UserService {
 
     async createUser(name: string, email: string, password: string) {
         const userExist = await prisma.user.findUnique({where: {email}})
@@ -29,3 +29,5 @@ export class UserService {
     }
 
 }
+
+export const userService = new UserService()

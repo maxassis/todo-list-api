@@ -1,5 +1,5 @@
 import {FastifyRequest, FastifyReply } from 'fastify'
-import { UserService } from '../Services/UserService'
+import { userService } from '../Services/UserService'
 
 import { z } from 'zod'
 
@@ -9,8 +9,7 @@ const BodyDTO = z.object({
     password: z.string().min(1, { message: "Senha obrigatoria" })
 })
 
-const userService = new UserService()
-export class CreateUserController {
+class CreateUserController {
     async create(request: FastifyRequest, reply: FastifyReply) {
         const { name, email, password } = BodyDTO.parse(request.body)
 
@@ -33,3 +32,5 @@ export class CreateUserController {
         }
     }
 }
+
+export const userController = new CreateUserController()
